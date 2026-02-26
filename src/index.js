@@ -55,8 +55,13 @@ io.on("connection", (socket) => {
   });
 });
 
+const PORT = process.env.PORT || 5000;
 /* ================= Connect DB ================= */
-await mongodbConnection();
+mongodbConnection().then(() => {
+  server.listen(PORT, () => {
+    console.log("Server running");
+  });
+});
 
 /* ================= Start Server ================= */
 const port = process.env.PORT || 5000;
