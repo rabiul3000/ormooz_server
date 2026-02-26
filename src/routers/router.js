@@ -10,6 +10,7 @@ router.use("/auth", authRoutes);
 router.use("/foods", foodsRouts);
 router.use("/orders", orderRoutes);
 router.use("/notifications", notificationRoutes);
+router.use("/", (req, res) => res.status(200).json("server is running"));
 
 
 export default router;

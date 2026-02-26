@@ -1,5 +1,6 @@
-import dotenv from "dotenv"
-dotenv.config();
+if (process.env.NODE_ENV !== "production") {
+  await import("dotenv/config");
+}
 import express from "express";
 import router from "./routers/router.js";
 import cors from "cors";
@@ -56,13 +57,10 @@ io.on("connection", (socket) => {
 });
 
 const PORT = process.env.PORT || 5000;
-/* ================= Connect DB ================= */
+/* ================= Connect DB and start server ================= */
 mongodbConnection().then(() => {
   server.listen(PORT, () => {
     console.log("Server running");
   });
 });
 
-/* ================= Start Server ================= */
-const port = process.env.PORT || 5000;
-server.listen(port, () => console.log(`http://localhost:${port}`));
