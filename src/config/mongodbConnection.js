@@ -4,15 +4,11 @@ dotenv.config();
 
 const mongodbConnection = async () => {
     try {
-        const mongoUri = process.env.MONGODB_URL;
-
-        if (!mongoUri) {
-            throw new Error("MONGODB_URL is not defined in environment variables");
-        }
         console.log("Connecting to MongoDB...");
+        const mongoUri = process.env.MONGODB_URL;
         await mongoose.connect(mongoUri);
         console.log("MongoDB connected successfully");
-    } catch (error) {      
+    } catch (error) {
         console.error("MongoDB error=====>", error);
         process.exit(1);
     }
