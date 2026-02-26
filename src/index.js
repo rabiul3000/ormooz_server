@@ -4,11 +4,11 @@ import express from "express";
 import router from "./routers/router.js";
 import cors from "cors";
 import morgan from "morgan";
-import connectdb from "./config/connectdb.js";
 import cookieParser from "cookie-parser";
 import http from "http";
 import { Server } from "socket.io";
 import helmet from "helmet";
+import mongodbConnection from "./config/mongodbConnection.js";
 const app = express();
 
 
@@ -56,7 +56,7 @@ io.on("connection", (socket) => {
 });
 
 /* ================= Connect DB ================= */
-await connectdb();
+await mongodbConnection();
 
 /* ================= Start Server ================= */
 const port = process.env.PORT || 5000;
