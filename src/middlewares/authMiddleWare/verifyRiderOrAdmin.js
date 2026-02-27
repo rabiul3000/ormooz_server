@@ -1,6 +1,3 @@
-import dotenv from "dotenv";
-dotenv.config();
-
 const verifyRiderOrAdmin = async (req, res, next) => {
     
     const role = req.user?.role;
