@@ -1,9 +1,6 @@
 import User from "../../models/User.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
-import dotenv from "dotenv";
-
-dotenv.config();
 
 const loginUser = async (req, res) => {
   const { email, password } = req.body;
@@ -33,10 +30,11 @@ const loginUser = async (req, res) => {
     // 🍪 Set cookie
     res.cookie("token", token, {
       httpOnly: true,
-      secure: false,
-      sameSite: "lax",
+      secure: true,          // REQUIRED for HTTPS (Railway uses HTTPS)
+      sameSite: "none",      // REQUIRED for cross-domain
       maxAge: 7 * 24 * 60 * 60 * 1000,
     });
+
     const user = savedUser.toObject();
     delete user.password;
     return res.status(200).json({ message: "User logged in successfully", user });
