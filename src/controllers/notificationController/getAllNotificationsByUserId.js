@@ -7,7 +7,8 @@ const getAllNotificationsByUserId = async (req, res) => {
     if (status === "all") {
       const notifications = await Notification.find({ to: userId }).sort({
         createdAt: -1,
-      });
+      }).populate("from", "name image").skip(0).limit(10);
+      console.log(notifications);
       if (!notifications) {
         return res.status(404).json({ message: "no notification found" });
       }
